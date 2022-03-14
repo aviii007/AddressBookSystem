@@ -3,6 +3,7 @@ package com.bridgelabz;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Iterator;
 
 public class AddressBook {
     private  static Scanner scanner = new Scanner(System.in);
@@ -43,7 +44,7 @@ public class AddressBook {
 
     private static void readUserInput(Scanner scanner) {
         System.out.println("Please select one option");
-        System.out.println("1. Create new contact \n2. Edit contact \n3. List contacts");
+        System.out.println("1. Create new contact \n2. Edit contact \n3. List contacts \n4. Delete contact ");
         int userChoice = scanner.nextInt();
         switch (userChoice) {
             case 1:
@@ -56,10 +57,26 @@ public class AddressBook {
             case 3:
                 listContacts();
                 break;
+            case 4:
+                deleteContact();
+                break;
             default:
                 System.out.println("Invalid option. Please select valid");
     }
 }
+
+    private static void deleteContact() {
+        System.out.println("Please enter the name of the person u want to delete :");
+        String contactName = scanner.next();
+        Iterator<Contact> iterator = contactList.iterator();
+        while(iterator.hasNext()){
+            Contact contact = iterator.next();
+            if(contactName.equals(contact.getFirstName())){
+                iterator.remove();
+            }
+        }
+        listContacts();
+    }
 
     private static void listContacts() {
         System.out.println(contactList);
